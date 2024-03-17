@@ -56,7 +56,18 @@ fun ShoppingList(){
                     .padding(8.dp),
                     horizontalArrangement = Arrangement.SpaceBetween) {
                     // Add Button
-                    Button(onClick = { /*TODO*/ }) {
+                    Button(onClick = {
+                        if (itemName.isNotBlank()){
+                            val newItems = ShoppingItems(
+                                id = sItems.size + 1,
+                                name = itemName,
+                                quantity = itemQuantity.toInt()
+                            )
+                            sItems = sItems + newItems
+                            showDialog = false
+                            itemName = ""
+                        }
+                    }) {
                         Text(text = "Add Item")
                     }
 
