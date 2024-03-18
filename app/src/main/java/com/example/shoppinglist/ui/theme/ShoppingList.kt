@@ -149,7 +149,8 @@ Row(modifier = Modifier
     .border(
         border = BorderStroke(2.dp, Color(0XFF018786)),
         shape = RoundedCornerShape(20)
-    )) {
+    ),
+    horizontalArrangement = Arrangement.SpaceBetween) {
 
     // item
     Text(text = item.name, modifier = Modifier.padding(8.dp))
@@ -158,11 +159,11 @@ Row(modifier = Modifier
     Text(text = "Quantity: ${item.quantity}", modifier= Modifier.padding(8.dp))
 
     Row(modifier= Modifier.padding(8.dp)) {
-        IconButton(onClick = { onEditClick }) {
+        IconButton(onClick = onEditClick) {
             Icon(imageVector = Icons.Default.Edit, contentDescription = null)
         }
 
-        IconButton(onClick = { onDeleteClick }) {
+        IconButton(onClick = onDeleteClick) {
             Icon(imageVector = Icons.Default.Delete, contentDescription = null)
         }
     }
