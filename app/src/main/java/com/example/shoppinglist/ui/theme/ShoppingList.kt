@@ -60,7 +60,8 @@ fun ShoppingList(){
                     // edit the item in the list
                     ShoppingItemEditor(item = item,
                         onEditComplete = {
-                            edittedName, edittedQuanity -> sItems = sItems.map { it.copy(isEditing = false) }
+                            edittedName, edittedQuanity ->
+                            sItems = sItems.map { it.copy(isEditing = false) }
                             val  edittedItem = sItems.find { it.id == item.id }
                             edittedItem?.let {
                                 it.name = edittedName
@@ -70,10 +71,11 @@ fun ShoppingList(){
                 }else {
 
                     // show the shopping list and control the edit and delete button
-                    ShoppingListItems(item = item, onEditClick = {
+                    ShoppingListItems(item = item,
 
-                        //finding which item is clicked to edit
-                        sItems = sItems.map { it.copy(isEditing = it.id == item.id) }
+                        onEditClick = {
+                            //finding which item is clicked to edit and changing "isEditing" boolean to true
+                            sItems = sItems.map { it.copy(isEditing = it.id == item.id) }
                     },
                         // delete the item
                         onDeleteClick = { sItems = sItems - item } )
