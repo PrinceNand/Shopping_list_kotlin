@@ -54,7 +54,30 @@ fun ShoppingList(){
 
         LazyColumn(modifier = Modifier.fillMaxSize()) {
             items(sItems){
-                ShoppingListItems(item = it, {}, {})
+                item ->
+                if (item.isEditing){
+
+                    // edit the item in the list
+                    ShoppingItemEditor(item = item,
+                        onEditComplete = {
+                            edittedName, edittedQuanity -> sItems = sItems.map { it.copy(isEditing = false) }
+                            val  edittedItem = sItems.find { it.id == item.id }
+                            edittedItem?.let {
+                                it.name = edittedName
+                                it.quantity = edittedQuanity
+                            }
+                        })
+                }else {
+
+                    // show the shopping list and control the edit and delete button
+                    ShoppingListItems(item = item, onEditClick = {
+
+                        //finding which item is clicked to edit
+                        sItems = sItems.map { it.copy(isEditing = it.id == item.id) }
+                    },
+                        // delete the item
+                        onDeleteClick = { sItems = sItems - item } )
+                }
             }
         }
     }
